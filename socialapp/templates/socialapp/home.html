@@ -1,0 +1,199 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Social Media App</title>
+
+    <link rel="stylesheet" href="{% static 'socialapp/style.css' %}">
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <h2 class="logo">SocialApp</h2>
+
+        <div class="nav-links">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'profile' request.user.id %}">
+                My Profile
+            </a>
+
+            <a href="{% url 'create_post' %}">
+                Create Post
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- Main Content -->
+<main class="main-container">
+
+    <h1>Welcome to My Social Media App 👋</h1>
+
+    <h2>
+        Hello, {{ request.user.username }}!
+    </h2>
+
+    <p>
+        You are successfully logged in.
+    </p>
+
+
+    <!-- Posts -->
+    <h2>Posts</h2>
+
+
+    {% for post in posts %}
+
+    <div class="post-card">
+
+        <!-- User -->
+        <p>
+
+            <strong>
+                <a href="{% url 'profile' post.user.id %}">
+                    {{ post.user.username }}
+                </a>
+            </strong>
+
+            {% if request.user != post.user %}
+
+                <a
+                    class="follow-button"
+                    href="{% url 'follow_user' post.user.id %}"
+                >
+                    Follow
+                </a>
+
+            {% endif %}
+
+        </p>
+
+
+        <!-- Post Content -->
+        <p class="post-content">
+            {{ post.content }}
+        </p>
+
+
+        <!-- Date -->
+        <small>
+            {{ post.created_at }}
+        </small>
+
+
+        <!-- Delete Post -->
+        {% if request.user == post.user %}
+
+            <form
+                method="POST"
+                action="{% url 'delete_post' post.id %}"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="delete-button"
+                >
+                    🗑️ Delete
+                </button>
+
+            </form>
+
+        {% endif %}
+
+
+        <!-- Like -->
+        <form
+            method="POST"
+            action="{% url 'like_post' post.id %}"
+        >
+
+            {% csrf_token %}
+
+            <button type="submit">
+
+                ❤️ Like ({{ post.likes.count }})
+
+            </button>
+
+        </form>
+
+
+        <!-- Comments -->
+        <h3>Comments 💬</h3>
+
+
+        {% for comment in post.comments.all %}
+
+            <p class="comment">
+
+                <strong>
+                    {{ comment.user.username }}
+                </strong>:
+
+                {{ comment.text }}
+
+            </p>
+
+        {% empty %}
+
+            <p>
+                No comments yet.
+            </p>
+
+        {% endfor %}
+
+
+        <!-- Add Comment -->
+        <form
+            method="POST"
+            action="{% url 'add_comment' post.id %}"
+        >
+
+            {% csrf_token %}
+
+            <input
+                type="text"
+                name="text"
+                placeholder="Write a comment..."
+                required
+            >
+
+            <button type="submit">
+                Comment
+            </button>
+
+        </form>
+
+    </div>
+
+    {% empty %}
+
+        <p>No posts yet.</p>
+
+    {% endfor %}
+
+</main>
+
+
+</body>
+</html>

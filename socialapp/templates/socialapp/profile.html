@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ profile_user.username }} - Profile</title>
+
+    <link rel="stylesheet" href="{% static 'socialapp/style.css' %}">
+</head>
+
+<body>
+
+<h1>{{ profile_user.username }}'s Profile</h1>
+
+<!-- Profile Picture -->
+{% if profile.profile_image %}
+    <img
+        src="{{ profile.profile_image.url }}"
+        width="150"
+        height="150"
+        alt="Profile Picture"
+    >
+    <br><br>
+{% else %}
+    <p>No profile picture uploaded.</p>
+{% endif %}
+
+
+<!-- Username -->
+<h2>{{ profile_user.username }}</h2>
+
+
+<!-- Bio -->
+<p>
+    <strong>Bio:</strong>
+    {{ profile.bio }}
+</p>
+
+
+<!-- Followers -->
+<p>
+    <a href="{% url 'followers_list' profile_user.id %}">
+        Followers: {{ followers_count }}
+    </a>
+</p>
+
+
+<!-- Following -->
+<p>
+    <a href="{% url 'following_list' profile_user.id %}">
+        Following: {{ following_count }}
+    </a>
+</p>
+
+
+<!-- Edit Profile -->
+{% if request.user == profile_user %}
+
+    <br>
+
+    <a href="{% url 'edit_profile' %}">
+        <button type="button">Edit Profile</button>
+    </a>
+
+{% endif %}
+
+
+<hr>
+
+
+<!-- Posts -->
+<h2>Posts</h2>
+
+{% for post in posts %}
+
+    <div>
+
+        <p>{{ post.content }}</p>
+
+        <small>{{ post.created_at }}</small>
+
+        <hr>
+
+    </div>
+
+{% empty %}
+
+    <p>No posts yet.</p>
+
+{% endfor %}
+
+
+<br>
+
+
+<!-- Back to Home -->
+<a href="{% url 'home' %}">
+    Back to Home
+</a>
+
+
+</body>
+</html>

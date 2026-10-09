@@ -1,0 +1,193 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+
+/* Navigation Bar */
+
+.navbar {
+    background-color: #1877f2;
+    width: 100%;
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* Main Content */
+
+.main-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.main-container > h1 {
+    text-align: center;
+    color: #222;
+}
+
+
+/* Post Card */
+
+.post-card {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Username */
+
+.post-card strong a {
+    color: #1877f2;
+    text-decoration: none;
+}
+
+.post-card strong a:hover {
+    text-decoration: underline;
+}
+
+
+/* Post Content */
+
+.post-content {
+    font-size: 17px;
+    margin: 15px 0;
+}
+
+
+/* Buttons */
+
+button {
+    background-color: #1877f2;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    padding: 9px 15px;
+    margin-top: 10px;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #145db2;
+}
+
+
+/* Delete Button */
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #b02a37;
+}
+
+
+/* Follow Button */
+
+.follow-button {
+    background-color: #42b72a;
+    color: white;
+
+    padding: 7px 12px;
+    border-radius: 5px;
+
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.follow-button:hover {
+    background-color: #36a420;
+}
+
+
+/* Comment */
+
+.comment {
+    background-color: #f0f2f5;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+/* Input */
+
+input,
+textarea {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    margin-top: 5px;
+}
+
+
+/* Links */
+
+a {
+    color: #1877f2;
+}
+
+
+/* Horizontal line */
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+
+    margin: 20px 0;
+}
+
+
+/* Small text */
+
+small {
+    color: #777;
+}
